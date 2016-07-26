@@ -43,25 +43,27 @@ public class dateDiff {
 		}
 	}
 
-	public void timeBetween(LocalDate init, LocalDate subs) {
+	public void timeBetween(LocalDate first, LocalDate second) {
 
-		Period p;
+		// the 'between' method below creates a period with a length equal to
+		// the time between the two date parameters
+		Period period;
 
 		// this block ensures earlier date is first date in period
-		if (init.isBefore(subs)) {
-			p = Period.between(init, subs);
+		if (first.isBefore(second)) {
+			period = Period.between(first, second);
 		} else {
-			p = Period.between(subs, init);
+			period = Period.between(second, first);
 		}
 
 		// getting years/months/days between two dates
-		int yearDiff = p.getYears();
-		int monthDiff = p.getMonths();
-		int dayDiff = p.getDays();
+		int yearDiff = period.getYears();
+		int monthDiff = period.getMonths();
+		int dayDiff = period.getDays();
 
 		// having fun with printing the results
 		System.out.println("\n---------------------------------------------------------\nRESULT\n");
-		System.out.println("Date 1: " + init.toString() + "\tDate 2: " + subs);
+		System.out.println("Date 1: " + first + "\tDate 2: " + second);
 		System.out.println("\nTime between dates:");
 		System.out.println(yearDiff + " year(s)\n" + monthDiff + " month(s)\n" + dayDiff + " day(s)");
 		System.out.println("---------------------------------------------------------");
