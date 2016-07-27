@@ -38,7 +38,6 @@ public class DateDiff {
 				// this will catch errors and let user retry
 				System.out.println("That is not a valid date. Please try again.\n");
 				System.out.print("Please enter Date #" + counter + " in the format MM/DD/YYYY: ");
-				continue;
 			}
 		}
 		return date;
