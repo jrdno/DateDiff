@@ -1,50 +1,50 @@
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
-public class dateDiff {
-
+public class DateDiff {
 	// counter that keeps track of which date we are collecting
-	static int counter = 1;
+	private int counter = 1;
+	private Scanner sc;
 
-	public dateDiff() {
-
+	public DateDiff() {
 		System.out.println("This program calculates the time between two dates.\n");
+		sc = new Scanner(System.in);
 
 		LocalDate dateOne = collectDate();
 		LocalDate dateTwo = collectDate();
-
+		sc.close();
+		
 		this.timeBetween(dateOne, dateTwo);
 	}
 
-	public LocalDate collectDate() {
-
+	private LocalDate collectDate() {
+		LocalDate date = null;
+		
 		// defining date format
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		System.out.print("Please enter Date #" + counter + " in the format MM/DD/YYYY: ");
 
-		while (true) {
+		while (sc.hasNext()) {
 			try {
-				System.out.print("Please enter Date #" + counter + " in the format MM/DD/YYYY: ");
-				Scanner sc = new Scanner(System.in);
 				String input = sc.next();
 
 				// parsing user input to get date in correct format
-				LocalDate date = LocalDate.parse(input, dateFormat);
-
+				date = LocalDate.parse(input, dateFormat);
 				counter++;
-				return date;
-
+				break;
 			} catch (Exception e) {
 				// this will catch errors and let user retry
 				System.out.println("That is not a valid date. Please try again.\n");
+				System.out.print("Please enter Date #" + counter + " in the format MM/DD/YYYY: ");
 				continue;
 			}
 		}
+		return date;
 	}
-
-	public void timeBetween(LocalDate first, LocalDate second) {
-
+	
+	private void timeBetween(LocalDate first, LocalDate second) {
 		// the 'between' method below creates a period with a length equal to
 		// the time between the two date parameters
 		Period period;
@@ -68,5 +68,4 @@ public class dateDiff {
 		System.out.println(yearDiff + " year(s)\n" + monthDiff + " month(s)\n" + dayDiff + " day(s)");
 		System.out.println("---------------------------------------------------------");
 	}
-
 }
